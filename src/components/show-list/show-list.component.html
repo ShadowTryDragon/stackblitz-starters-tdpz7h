@@ -1,0 +1,65 @@
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>Serie suchen:</tr>
+
+    <input
+
+    class="form-control"
+
+    id="suchString"
+
+    name="suchString"
+
+    type="text"
+
+    placeholder="Wonach suchen sie?"
+
+    [(ngModel)]="suchString"
+
+    />
+
+    <tr>
+      <th>ID</th>
+      <th>Serientitel</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(s of shows; track s.id) 
+    {
+      
+      @if(!toEdit(s)) {
+        <tr (click)="showDetails(s)">
+          <td>{{s.id}}</td>
+          <td>{{s.title}}</td>
+          
+          <td>
+            <button type="button" class="material-symbols-outlined" (click)="edit(s)">
+              edit
+            </button>
+
+          </td>
+          <td>
+            <button type="button" class="material-symbols-outlined" (click)="delete(s)">
+              delete
+            </button>
+          </td>      
+        </tr>
+      }
+      @else {
+        <tr>
+          <td>
+            <input type="number" id="editierbareShowID" name="editierbareShowID" [(ngModel)]="s.id">
+          </td>
+          <td>
+            <input type="text" id="editierbareShowTitle" name="editierbareShowTitle" [(ngModel)]="s.title">
+          </td>
+          <td colspan="2">
+            <button type="button" class="material-symbols-outlined" (click)="saveEdit()">save</button>
+          </td>
+        </tr>
+      }
+    }
+  </tbody>
+</table>
